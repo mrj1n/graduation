@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监控视频检索系统</title>
+</head>
+<body>
+    <h1>欢迎来到监控视频检索系统</h1>
+    {% for camera in camera_list %}
+        <h3>{{ camera.interval }}</h3>
+    {% endfor %}
+</body>
+</html>

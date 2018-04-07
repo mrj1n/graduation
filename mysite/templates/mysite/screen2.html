@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监控视频检索系统</title>
+    {% load static %}
+    <script src="{% static 'mysite/js/vue/2.4.2/vue.js' %}" type="application/javascript"></script>
+    <script src="{% static 'mysite/js/axios/0.16.2/axios.js' %}" type="application/javascript"></script>
+    <link rel="stylesheet" href="{% static 'mysite/screen.css' %}" type="text/css">
+
+</head>
+<body>
+{% verbatim myblock %}
+    <div class="header">
+        <div class="title" >
+            <div>
+                <h1>监 控 视 频 检 索 系 统</h1>
+            </div>
+        </div>
+    </div>
+    <div id="screen2">
+        <div id="app" v-bind:style="styleObject">
+            <span>{{ date }}</span>
+            <span>请选择日期</span>
+            <input type="date" v-model="date" name="date" v-on:change="get_camera">
+            <div v-if="camera_list.length != 0" class="camera_list">
+                <button v-for="camera in camera_list" v-on:click="get_video($event)" style="margin-right: 20px">
+                     Camera {{ camera.camera }}
+                </button>
+                <div v-if="videos.camera" style="padding: 0 170px">
+                <h3 style="text-align: center;">Camera{{ videos.camera }}</h3>
+
+                <div class="videoBlock" v-for="video in videos">
+                    <video width="360" height="200" controls>
+                        <source v-bind:src="video.fields.video_url"  type="video/mp4">
+                    </video>
+                    <div class="info">
+                        <span>{{ video.fields.interval_time }}</span>
+                        <button v-on:click="summarize" v-bind:id="video.fields.id">摘要</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div v-else class="camera_list">
+                <span>没有数据！</span>
+            </div>
+            <hr/>
+
+
+        </div>
+        <div id="app2" v-bind:style="styleObject">
+            <p style="text-align: center">摄像头：Camera{{ camera }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：{{ date }}&nbsp;&nbsp;&nbsp;&nbsp;时间段：{{ interval_time }}</p>
+            <div v-if="hasObject == 1" style="padding: 0 130px">
+                <div class="summaryBlock" v-for="object in objects">
+                    <video width="360" height="200" controls >
+                        <source   type="video/mp4">
+                    </video>
+                    <div>
+                        <p>Sex: {{ object.sex }} {{ object.sex_confidence }}</p>
+                        <p>upper_cloth_color: {{ object.upper_cloth_color }} {{ object.upper_cloth_color_confidence }}</p>
+                        <p>down_cloth_color: {{ object.down_cloth_color }} {{ object.down_cloth_color_confidence }}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-else>
+                <p>没有objects</p>
+            </div>
+
+
+            <div>
+                 <button v-on:click="return_0">返回</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endverbatim myblock %}
+
+<script type="application/javascript" src="{% static 'mysite/screen2.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+.header .title{
+    text-align: center;
+    border-bottom: 1px solid #eee
+}
+.body .lefter{
+    /*display: inline-block;*/
+    width: 200px;
+    text-align: center;
+    float: left;
+    border-right: 1px solid #eee;
+    height: 900px;
+}
+.body{
+
+}
+.body .title{
+    text-align: left;
+    font-size: large;
+}
+.camera_list{
+    height: 25px;
+}
+.videoBlock{
+    height: 230px;
+    display: inline-block;
+    margin-right: 25px;
+    margin-bottom: 10px;
+
+}
+.videoBlock .video{
+    height: 200px;
+}
+.videoBlock .info{
+    /*height: 20px;*/
+}
+.videoBlock .info a{
+    cursor: pointer;
+}
+.summaryBlock{
+    height: 230px;
+    display: inline-block;
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+

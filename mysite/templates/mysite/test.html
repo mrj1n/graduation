@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    {% load static %}
+    <script src="{% static 'mysite/js/vue/2.4.2/vue.js' %}" type="application/javascript"></script>
+    <script src="{% static 'mysite/js/axios/0.16.2/axios.js' %}" type="application/javascript"></script>
+    <link rel="stylesheet" href="{% static 'mysite/screen.css' %}" type="text/css">
+    <style>
+      body{
+          font-family:"Segoe UI";
+        }
+        li{
+          list-style:none;
+        }
+        a{
+          text-decoration:none;
+        }
+        .pagination {
+            position: relative;
+
+          }
+          .pagination li{
+            display: inline-block;
+            margin:0 5px;
+          }
+          .pagination li a{
+            padding:.5rem 1rem;
+            display:inline-block;
+            border:1px solid #ddd;
+            background:#fff;
+
+            color:#0E90D2;
+          }
+          .pagination li a:hover{
+            background:#eee;
+          }
+          .pagination li.active a{
+            background:#0E90D2;
+            color:#fff;
+          }
+  </style>
+</head>
+<body>
+{% verbatim myblock %}
+    <script type="text/x-template" id="page">
+        <ul class="pagination" >
+            <li v-show="current != 1" @click="current-- && goto(current)" ><a href="#">上一页</a></li>
+            <li v-for="index in pages" @click="goto(index)" :class="{'active':current == index}" :key="index">
+              <a href="#" >{{index}}</a>
+            </li>
+            <li v-show="allpage != current && allpage != 0 " @click="current++ && goto(current++)"><a href="#" >下一页</a></li>
+        </ul>
+    </script>
+    <div id="app">
+          <page>
+              <div v-if="hasObject == 1" style="padding: 0 170px">
+                <div class="summaryBlock" v-for="object in objects">
+                    <video width="360" height="200" controls >
+                        <source  v-bind:src="object" type="video/mp4">
+                    </video>
+                    <div>
+                        <p>Sex: {{ object.fields.sex }} {{ object.fields.sex_confidence }}</p>
+                        <p>upper_cloth_color: {{ object.fields.upper_cloth_color }}</p>
+                        <p>down_cloth_color: {{ object.fields.down_cloth_color }}</p>
+                    </div>
+                </div>
+            </div>
+          </page>
+    </div>
+
+
+
+
+{% endverbatim myblock %}
+    <script type="application/javascript" src="{% static 'mysite/test.js' %}"></script>
+
+</body>
+</html>
